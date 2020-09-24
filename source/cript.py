@@ -3,7 +3,8 @@ import os
 
 
 class Cript():
-    help_msg = """Comandi disponibili:
+    help_msg = """
+    Comandi disponibili:
     cript (subject) (filename): restituisce la chiave pubblica
 """
 

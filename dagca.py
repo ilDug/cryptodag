@@ -8,13 +8,15 @@ from source.install import Installer
 args = sys.argv
 del args[0]
 
-help_message = """Comandi disponibili:
-    gen: genera un elemento(vedi opzioni),
-    pubkey: restituisce la chiave pubblica
-    sign: firma un file
-    verify: verifica la firma
-    crypt: cripta un file
-    decript: decripta un file
+help_message = """
+Comandi disponibili:
+    install:    genera tutta l'infrastruttira ella PKI compreso il certificato root
+    gen:        genera un elemento(vedi opzioni),
+    pubkey:     restituisce la chiave pubblica
+    sign:       firma un file
+    verify:     verifica la firma
+    crypt:      cripta un file
+    decript:    decripta un file
     """
 
 # controlla che sia installato il sistema di CA

@@ -3,7 +3,8 @@ import os
 
 
 class Certificate():
-    help_msg = """Comandi disponibili:
+    help_msg = """
+    Comandi disponibili:
     pubkey: restituisce la chiave pubblica
 """
 

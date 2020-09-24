@@ -6,10 +6,11 @@ from string import Template
 
 
 class Gen():
-    help_msg = """Comandi disponibili:
-    privkey (subject) [bit]: genera una chiave privata con il nome subject (opzionale il numero di bit = 2048)
-    req (subject) [alt-names, ...]: genera una richiestadi firma per un certificato
-    cert (subject) [alt_names]: genera un certificato firmato da CA
+    help_msg = """
+Comandi disponibili:
+    privkey (subject) [bit]:            genera una chiave privata con il nome subject (opzionale il numero di bit = 2048)
+    req (subject) [alt-names, ...]:     genera una richiestadi firma per un certificato
+    cert (subject) [alt_names]:         genera un certificato firmato da CA
 """
 
     def __init__(self, args):

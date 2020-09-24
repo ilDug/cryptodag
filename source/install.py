@@ -5,7 +5,7 @@ from getpass import getpass
 
 #################################################
 # cancella tutto quello che c'e\' nella directori pki
-# crea una struttura di file e cartelel iniziale usando le impostazioni classiche
+# crea una struttura di file e cartelle iniziale usando le impostazioni classiche
 # genera una chiave per la CA
 #################################################
 
@@ -19,6 +19,12 @@ class Installer():
             _continue = input(
                 "l'infrastruttura e\' gia\' stata inizializzata. Se si prosegue tutti i dati verranno cancellati. Continuare [y/n]  ")
         if _continue == "y":
+            installation_msg = """
+- cancella tutto quello che c'e\' nella directori pki
+- crea una struttura di file e cartelle iniziale usando le impostazioni classiche
+- genera una chiave per la CA
+            """
+            print(installation_msg)
             self.create_pki()
             self.create_ca_key()
             self.create_ca_crt()
