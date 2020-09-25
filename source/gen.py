@@ -14,6 +14,8 @@ Comandi disponibili:
 """
 
     def __init__(self, args):
+        self.pki = Path('./pki')
+
         # nessun comando
         if len(args) == 0:
             print(self.help_msg)
@@ -49,15 +51,15 @@ Comandi disponibili:
 ######################################################################################
 
     def gen_privkey(self, name, bits=2048):
-        key = Path('pki/private/' + name + '.key')
+        key = Path(str(self.pki) + '/private/' + name + '.key')
         cmd = "openssl genrsa -out " + str(key) + " " + str(bits)
         os.system(cmd)
 ######################################################################################
 
     def gen_req(self, name):
-        key = Path('pki/private/' + name + '.key')
-        csr = Path('pki/reqs/' + name + '.csr')
-        config = Path('pki/configs/' + name + '.cnf')
+        key = Path(str(self.pki) + '/private/' + name + '.key')
+        csr = Path(str(self.pki) + '/reqs/' + name + '.csr')
+        config = Path(str(self.pki) + '/configs/' + name + '.cnf')
 
         cmd = 'openssl req \
             -config ' + str(config) + ' \
@@ -71,7 +73,7 @@ Comandi disponibili:
 
     def gen_config(self, name, alt_names):
         default = Path('source/default.cnf')
-        config = Path('pki/configs/' + name + '.cnf')
+        config = Path(str(self.pki) + '/configs/' + name + '.cnf')
         extensions = [
             "subjectAltName = @alt_names\n",
             "[alt_names]\n",
@@ -91,13 +93,12 @@ Comandi disponibili:
 ######################################################################################
 
     def gen_cert(self, name):
-        config = Path('pki/configs/openssl.cnf')
-        extfile = Path('pki/configs/' + name + '.cnf')
-        # config = Path('pki/configs/' + name + '.cnf')
-        pw = Path('pki/private/_passphrase')
-        csr = Path('pki/reqs/' + name + '.csr')
-        crt = Path('pki/certs/' + name + '.crt')
-        cacrt = Path('pki/certs/ca.crt')
+        config = Path(self.pki/'configs/openssl.cnf')
+        extfile = Path(str(self.pki) + '/configs/' + name + '.cnf')
+        pw = Path(self.pki/'private/_passphrase')
+        csr = Path(str(self.pki) + '/reqs/' + name + '.csr')
+        crt = Path(str(self.pki) + '/certs/' + name + '.crt')
+        cacrt = Path(self.pki/'certs/ca.crt')
         cmd = 'openssl ca \
             -config ' + str(config) + ' \
             -notext -md sha256 -days 3650 -verbose -batch\
