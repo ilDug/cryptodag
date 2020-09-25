@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 from source.gen import Gen
-from source.cript import Cript
+from source.crypt import Crypt, Decrypt
 from source.cert import Certificate
 from source.install import Installer
 from source.importer import Importer
@@ -19,7 +19,7 @@ Comandi disponibili:
     verify-sign:     verifica la firma
     verify-cert:     verifica un certificato
     crypt:      cripta un file
-    decript:    decripta un file
+    decrypt:    decripta un file
     """
 
 # controlla che sia installato il sistema di CA
@@ -46,15 +46,17 @@ elif args[0] == "gen":
 elif args[0] == "pubkey":
     cert = Certificate(args)
 
-
 elif args[0] == "import-ca":
     i = Importer(args)
 
 elif args[0] == "verify-cert":
-    c = Certificate(args)
+    cert = Certificate(args)
 
-elif args[0] == "cript":
-    pass
+elif args[0] == "crypt":
+    crypt = Crypt(args[1:])
+
+elif args[0] == "decrypt":
+    decrypt = Decrypt(args[1:])
 
 else:
     print(help_message)
