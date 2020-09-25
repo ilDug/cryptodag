@@ -5,7 +5,7 @@ import os
 class Certificate():
     help_msg = """
     Comandi disponibili:
-    pubkey:         restituisce la chiave pubblica
+    pubkey <subject> [--out <path-to-dir>]:    restituisce la chiave pubblica. se passato OUT salva il file nella posizione (sovrascrivendo)
     verify-cert <path-to-cert>:    verifica che un certificato sia stato firmato dalla CA
 """
 
@@ -18,7 +18,7 @@ class Certificate():
 # _______________________________________________________________________________________________
         elif args[0] == "pubkey":
             if len(args) < 2:
-                print("inserire il nome del soggetto")
+                print("mancano i parametri: pubkey <subject> [--out <path>]")
                 return
             name,  *opts = args[1:]
             self.public_key(name, opts)
@@ -41,15 +41,32 @@ class Certificate():
             print(
                 "attenzione,  non esiste un certificato per il soggetto indicato " + name)
             return
-        pubk = Path('pki/public/'+name+'.pub.pem')
+        pubk = Path('pki/public/' + name + '.pub.pem')
+
+        destination = None
+        if len(opts) > 0:
+            for opt in opts:
+                if opt == "--out":
+                    i = opts.index(opt) + 1
+                    destination = opts[i]
+                    destination = Path(destination)
+
         cmd = "openssl x509 \
             -pubkey \
             -noout \
             -in "+str(crt)+" \
             -out " + str(pubk)
         os.system(cmd)
+
+        if destination != None:
+            if not destination.exists():
+                destination.mkdir(parents=True)
+            destination = Path(str(destination) + '/' + name + '.pub.pem')
+            destination.write_text(pubk.read_text())
+
         print(pubk.read_text())
         return pubk.read_text()
+
 ################################################################################################
 
     def verifiy_cert(self, cert_path):

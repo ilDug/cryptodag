@@ -13,18 +13,18 @@ class Cript():
 
 ################################################################################################
 
-    def public_key(self, name, opts=[]):
-        crt = Path('pki/certs/'+name+'.crt')
-        if not crt.exists():
-            print(
-                "attenzione,  non esiste un certificato per il soggetto indicato " + name)
-            return
-        pubk = Path('pki/public/'+name+'.pub.pem')
-        cmd = "openssl x509 \
-            -pubkey \
-            -noout \
-            -in "+str(crt)+" \
-            -out " + str(pubk)
-        os.system(cmd)
-        print(pubk.read_text())
-        return pubk.read_text()
+    # def public_key(self, name, opts=[]):
+    #     crt = Path('pki/certs/'+name+'.crt')
+    #     if not crt.exists():
+    #         print(
+    #             "attenzione,  non esiste un certificato per il soggetto indicato " + name)
+    #         return
+    #     pubk = Path('pki/public/'+name+'.pub.pem')
+    #     cmd = "openssl x509 \
+    #         -pubkey \
+    #         -noout \
+    #         -in "+str(crt)+" \
+    #         -out " + str(pubk)
+    #     os.system(cmd)
+    #     print(pubk.read_text())
+    #     return pubk.read_text()
