@@ -114,11 +114,11 @@ class Installer():
 
         cmd = "openssl req \
         -x509 -new -nodes -sha256 -verbose \
-        -days 3650 \
+        -days 1825 \
         -passin file:" + str(passphrase) + " \
         -key " + str(cakey) + "   \
         -out " + str(cacrt)
-        # cmd = "openssl req \ -config " + str(config) + " \ -extensions v3_ca \ -x509 -new -nodes -sha256 -verbose \ -days 3650 \ -passin file:" + str(passphrase) + " \ -key " + str(cakey) + "   \ -out " + str(cacrt)
+        # cmd = "openssl req \ -config " + str(config) + " \ -extensions v3_ca \ -x509 -new -nodes -sha256 -verbose \ -days 1825 \ -passin file:" + str(passphrase) + " \ -key " + str(cakey) + "   \ -out " + str(cacrt)
         os.system(cmd)
         cacrt.chmod(444)
 
