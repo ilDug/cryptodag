@@ -101,7 +101,7 @@ Comandi disponibili:
         cacrt = Path(self.pki/'certs/ca.crt')
         cmd = 'openssl ca \
             -config ' + str(config) + ' \
-            -notext -md sha256 -days 1825 -verbose -batch\
+            -notext -md sha256 -days 365 -verbose -batch\
             -extfile ' + str(extfile) + ' \
             -extensions req_ext \
             -passin file:' + str(pw) + ' \

@@ -114,7 +114,7 @@ class Installer():
 
         cmd = "openssl req \
         -x509 -new -nodes -sha256 -verbose \
-        -days 1825 \
+        -days 365 \
         -passin file:" + str(passphrase) + " \
         -key " + str(cakey) + "   \
         -out " + str(cacrt)
